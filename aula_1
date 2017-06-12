@@ -1,0 +1,134 @@
+
+
+                                                #==================================
+                                                #==========   darkcod     =+=======
+                                                #========== luiz gustavo=========+=
+                                                #==================================
+"""
+
+                                                #==================================
+                                                #==========   darkcod     =+=======
+                                                #========== luiz gustavo=========+=
+                                                #==================================
+parte 1 introdução
+A rede é e sempre será a arena mais sexy
+Para um hacker. Um invasor pode fazer quase qualquer coisa com
+Acesso simples à rede, como a varredura de hosts, injeção
+Pacotes, cheirar dados, explorar remotamente hosts e muito
+Mais.
+
+parte 2 realidade
+Mas se você é um atacante que trabalhou seu
+Caminho para as profundidades mais profundas de um alvo empresarial,
+Você pode encontrar-se com um pouco de enigma: você não possui ferramentas para executar
+Ataques de rede. Nenhum netcat. Não é Wireshark. Nenhum compilador e nenhum meio para
+Instale um.
+
+parte 3 do que voce vai precisar para fazer esse tipo de ação
+=> 60 megas de internet e nada mais
+
+windows:
+=> python.exe(python-3.6.1-webinstall.exe(1.3 MB)) web
+=> python.exe(python-3.6.1.exe(29.0 MB)) full
+
+linux:
+=> ja vem instalado
+=> 2.7
+=> 3.5 ou 3.6
+=> ubuntu 3.5
+=> arch 3.6
+
+parte 4 pacotes
+= > voce vai poder instalar 30MBs de pacotes para voce dominara rede local mente ;) huehuehue
+
+parte 5 iniciando o hacking:
+
+=> Este primeira parte do modulo de  hacking , lhe dará alguns conceitos básicos em redes Python usando o
+módulo Socket. Ao longo do caminho, construiremos clientes, servidores e um proxy TCP;
+E depois transformá-los em nosso próprio netcat, completo  podendo fazer tudo que a gente quiser fazer na rede
+lembrando que vc ainda tem 30mbs de pacotes para turbinar o seu netcat srsr
+"""
+
+"""
+
+                                                #==================================
+                                                #==========   darkcod     =+=======
+                                                #========== luiz gustavo=========+=
+                                                #==================================
+██╗     ███████╗████████╗███████╗     ██████╗  ██████╗     ████████╗ ██████╗     ██╗  ██╗ █████╗  ██████╗██╗  ██╗██╗███╗   ██╗ ██████╗ 
+██║     ██╔════╝╚══██╔══╝██╔════╝    ██╔════╝ ██╔═══██╗    ╚══██╔══╝██╔═══██╗    ██║  ██║██╔══██╗██╔════╝██║ ██╔╝██║████╗  ██║██╔════╝ 
+██║     █████╗     ██║   ███████╗    ██║  ███╗██║   ██║       ██║   ██║   ██║    ███████║███████║██║     █████╔╝ ██║██╔██╗ ██║██║  ███╗
+██║     ██╔══╝     ██║   ╚════██║    ██║   ██║██║   ██║       ██║   ██║   ██║    ██╔══██║██╔══██║██║     ██╔═██╗ ██║██║╚██╗██║██║   ██║
+███████╗███████╗   ██║   ███████║    ╚██████╔╝╚██████╔╝       ██║   ╚██████╔╝    ██║  ██║██║  ██║╚██████╗██║  ██╗██║██║ ╚████║╚██████╔╝
+╚══════╝╚══════╝   ╚═╝   ╚══════╝     ╚═════╝  ╚═════╝        ╚═╝    ╚═════╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝ 
+██████╗ ██╗   ██╗████████╗██╗  ██╗ ██████╗ ███╗   ██╗    ███╗   ██╗███████╗████████╗██╗    ██╗ ██████╗ ██████╗ ██╗  ██╗██╗███╗   ██╗ ██████╗ 
+██╔══██╗╚██╗ ██╔╝╚══██╔══╝██║  ██║██╔═══██╗████╗  ██║    ████╗  ██║██╔════╝╚══██╔══╝██║    ██║██╔═══██╗██╔══██╗██║ ██╔╝██║████╗  ██║██╔════╝ 
+██████╔╝ ╚████╔╝    ██║   ███████║██║   ██║██╔██╗ ██║    ██╔██╗ ██║█████╗     ██║   ██║ █╗ ██║██║   ██║██████╔╝█████╔╝ ██║██╔██╗ ██║██║  ███╗
+██╔═══╝   ╚██╔╝     ██║   ██╔══██║██║   ██║██║╚██╗██║    ██║╚██╗██║██╔══╝     ██║   ██║███╗██║██║   ██║██╔══██╗██╔═██╗ ██║██║╚██╗██║██║   ██║
+██║        ██║      ██║   ██║  ██║╚██████╔╝██║ ╚████║    ██║ ╚████║███████╗   ██║   ╚███╔███╔╝╚██████╔╝██║  ██║██║  ██╗██║██║ ╚████║╚██████╔╝
+╚═╝        ╚═╝      ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═╝  ╚═══╝╚══════╝   ╚═╝    ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝ 
+Os programadores possuem várias ferramentas de terceiros para criar redes,
+Servidores e clientes em Python, mas o módulo principal para todas essas ferramentas é
+socket. Este módulo expõe todas as peças necessárias para escrever rapidamente escrever um 
+client e TCP e UDP , usam sockets brutos e assim por diante. Para os seus  propósitos
+De entrar ou manter o acesso às máquinas alvo, este módulo é tudo
+Você realmente precisa. Começaremos  por criar alguns clientes e servidores simples, o
+Dois scripts de rede rápidos mais comuns que você escreverá.                                                                                                                                                                                                                                         
+"""
+
+"""
+
+                                                #==================================
+                                                #==========   darkcod     =+=======
+                                                #========== luiz gustavo=========+=
+                                                #==================================
+████████╗ ██████╗██████╗      ██████╗██╗     ██╗███████╗███╗   ██╗████████╗
+╚══██╔══╝██╔════╝██╔══██╗    ██╔════╝██║     ██║██╔════╝████╗  ██║╚══██╔══╝
+   ██║   ██║     ██████╔╝    ██║     ██║     ██║█████╗  ██╔██╗ ██║   ██║   
+   ██║   ██║     ██╔═══╝     ██║     ██║     ██║██╔══╝  ██║╚██╗██║   ██║   
+   ██║   ╚██████╗██║         ╚██████╗███████╗██║███████╗██║ ╚████║   ██║   
+   ╚═╝    ╚═════╝╚═╝          ╚═════╝╚══════╝╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝ 
+Houve inúmeras vezes durante testes de penetração que eu precisava 
+arrumar um cliente TCP para testar serviços, enviar dados de lixo, fuzz ou
+Qualquer outra tarefa. Se você estiver trabalhando dentro dos confins de grandes
+Ambientes empresariais, você não terá o luxo de ferramentas de rede ou
+Compiladores, e às vezes você estará faltando os princípios básicos absolutos, como o
+Capacidade de copiar / colar ou uma conexão com a Internet. É aí que ser capaz de
+Rapidamente criar um cliente TCP vem extremamente útil. Mas aqui vamos aprender 
+a codificar um client tcp:
+
+ 
+"""
+
+"""
+
+                                                #==================================
+                                                #==========   darkcod     =+=======
+                                                #========== luiz gustavo=========+=
+                                                #==================================
+███████╗██╗  ██╗██████╗ ██╗     ██╗ ██████╗ █████╗  ██████╗     
+██╔════╝╚██╗██╔╝██╔══██╗██║     ██║██╔════╝██╔══██╗██╔═══██╗    
+█████╗   ╚███╔╝ ██████╔╝██║     ██║██║     ███████║██║   ██║    
+██╔══╝   ██╔██╗ ██╔═══╝ ██║     ██║██║     ██╔══██║██║   ██║    
+███████╗██╔╝ ██╗██║     ███████╗██║╚██████╗██║  ██║╚██████╔╝    
+╚══════╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝ 
+Primeiro, criamos um objeto socket com os parâmetros AF_INET e SOCK_STREAM
+O parâmetro AF_INET está dizendo que vamos usar um padrão Endereço IPv4 ou nome do host  e SOCK_STREAM indica que este será um TCP
+import socket 
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+print(s)
+<socket.socket fd=3, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 0)>
+<socket.socket fd=3, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 57556), raddr=('127.0.0.1', 900)>
+
+o client vai se conectar ao host e a porta que foram dados usando o parametro 
+s.connect((target_host, target_port))
+
+nessa parte ele vai mandar um pacote para o host e para a porta x 
+s.send(b"GET HTTP/1.1\r\nHost:google.com\r\n\r\n")
+
+e agora vamos  receber o output da conexao por isso reposta = s.recv(4096) e quando eu recever eu passo o valor dessa variavel paa o print para eu poder ver 
+
+resposta  = s.recv(4096)
+print(resposta)
+
+"""
